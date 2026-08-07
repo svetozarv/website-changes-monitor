@@ -1,1 +1,1 @@
-# website-changes-monitor
+Stack: FastAPI, PostgreSQL, Celery Beat
