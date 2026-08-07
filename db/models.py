@@ -7,9 +7,6 @@ Base = declarative_base()
 class Target(Base):
     __tablename__ = "targets"
 
-    last_checked = Column(DateTime, default=datetime.utcnow)
-    last_content_hash = Column(String)
-
     # Primary key
     id = Column(Integer, primary_key=True, index=True)
 
