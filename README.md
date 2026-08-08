@@ -1,5 +1,8 @@
-Stack: FastAPI, Uvicorn, Pydantic
-PostgreSQL, Redis, SQLAlchemy, Alembic, Docker, Docker Compose
+Stack:
+- FastAPI, Uvicorn, Pydantic
+- PostgreSQL, SQLAlchemy, Alembic,
+- Redis, Celery,
+- Docker, Docker Compose
 
 
 ```
@@ -11,6 +14,12 @@ docker run --name uptime_db \
   -p 5432:5432 \
   -d postgres:15-alpine
 ```
+```
+docker run --name uptime_redis \
+  -p 6379:6379 \
+  -d redis:7-alpine
+```
+
 
 `alembic revision --autogenerate -m "initial_tables"`
 
