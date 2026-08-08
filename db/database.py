@@ -1,8 +1,12 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+POSTGRES_PORT = os.getenv("POSTGRES_PORT")
+POSTGRES_DB = os.getenv("POSTGRES_DB")  # db name
+
 # Connection string for a local Docker PostgreSQL instance
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/website-changes-monitor"
+SQLALCHEMY_DATABASE_URL = f"postgresql://postgres:postgres@postgres:{POSTGRES_PORT}/{POSTGRES_DB}"
 
 # Create the SQLAlchemy engine
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
