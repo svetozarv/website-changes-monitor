@@ -1,6 +1,6 @@
 import requests
 from db.database import SessionLocal
-from db.models import CheckLog
+from db.models import CheckLog, Target
 from core.celery_app import celery_instance
 from typing import Annotated
 
@@ -22,3 +22,11 @@ def ping_url(target_id: int, url: str) -> Annotated[int, "status code"]:
         db.commit()
 
     return status_code
+
+
+@celery_instance.task
+def schedule_pings():
+    with SessionLocal() as db:
+        targets = db.query(Target).filter(Target.is_active == True).all()
+        for target in targets:
+            ping_url.delay(target.id, str(target.url))
