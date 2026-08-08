@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from db.database import get_db
 from db.models import Target
 import datetime
+from core.tasks import ping_url
 
 app = FastAPI()
 
@@ -20,6 +21,7 @@ def create_target(target: TargetCreate, db: Session = Depends(get_db)):
     db.add(new_target)
     db.commit()
     db.refresh(new_target)
+    ping_url.delay(new_target.id, str(new_target.url))
     return new_target
 
 
@@ -36,4 +38,4 @@ def delete_target(target_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Target not found.")
     db.delete(target_obj)
     db.commit()
-    return {"message": "Target successfully deleted"}
+    return {"message": "Target has been successfully deleted."}
