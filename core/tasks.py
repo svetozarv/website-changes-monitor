@@ -17,7 +17,10 @@ def ping_url(target_id: int, url: str) -> Annotated[int, "status code"]:
     except requests.RequestException as e:
         pass
 
-    # save the result of the check to db
+    # TODO: Clear noise (Sanitization)
+    # TODO: Aggregate text 
+    # TODO: Make breadcrumbs
+
     with SessionLocal() as db:
         check_log = CheckLog(target_id=target_id, status_code=status_code, response_time_ms=response_time_ms)
         db.add(check_log)
