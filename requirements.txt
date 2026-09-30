@@ -25,6 +25,7 @@ httpcore==1.0.9
 httptools==0.8.0
 httpx==0.28.1
 idna==3.18
+iniconfig==2.3.0
 Jinja2==3.1.6
 kombu==5.6.2
 Mako==1.4.1
@@ -32,6 +33,7 @@ markdown-it-py==4.2.0
 MarkupSafe==3.0.3
 mdurl==0.1.2
 packaging==26.3
+pluggy==1.6.0
 prompt_toolkit==3.0.53
 psycopg2-binary==2.9.12
 pybind11==3.1.0
@@ -40,6 +42,7 @@ pydantic-extra-types==2.11.1
 pydantic-settings==2.15.0
 pydantic_core==2.46.4
 Pygments==2.20.0
+pytest==9.1.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
 python-multipart==0.0.32
@@ -49,6 +52,7 @@ requests==2.34.2
 rich==15.0.0
 rich-toolkit==0.20.3
 rignore==0.8.1
+selectolax==0.4.12
 sentry-sdk==2.66.1
 setuptools==83.0.0
 shellingham==1.5.4
@@ -67,4 +71,3 @@ vine==5.1.0
 watchfiles==1.2.0
 wcwidth==0.8.2
 websockets==17.0.1
--e .
