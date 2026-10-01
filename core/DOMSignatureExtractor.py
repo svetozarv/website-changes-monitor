@@ -38,13 +38,14 @@ class DOMSignatureExtractor:
             text = node.text(deep=True, separator=" ", strip=True, skip_empty=True)
             text = self._normalize_whitespaces(text)
 
-
+        # TODO:
         node_child = node.first_child
         while node_child is not None:
             self._traverse(node_child, current_path, signatures)
             node_child = node_child.next
 
     def _process_block(self, node: LexborNode):
+        # TODO:
         pass
 
     def _is_leaf_block(self, node: LexborNode):
@@ -58,7 +59,7 @@ class DOMSignatureExtractor:
             raise ValueError("Node cannot be `None`.")
         if isinstance(node, str):
             raise ValueError("Node must be LexborNode, not string")
-
+        # TODO:
         node_child = node.first_child
         while node_child is not None:
             if node_child.tag in CONTAINER_TAGS or node_child.tag in TERMINAL_BLOCKS:
@@ -67,14 +68,28 @@ class DOMSignatureExtractor:
         return True
 
     def _form_node_selector(self, node: LexborNode) -> str:
+        # TODO:
         if not node or node.tag == "-text" or node.tag == "-document" or node.tag == "-comment":
             raise ValueError(f"Cannot form selector for: `{node.tag}`")
+
         selector = f"{node.tag}"
         validated_classes = self._split_and_validate_classes(node.attributes['class'])
-        if validated_classes:
+        try:
             selector += f".{validated_classes[0]}"
-            
-        return "div.class1_example.class2_example#id_example"
+            selector += f".{validated_classes[1]}"
+        except IndexError:
+            pass    # validated_classes doesn't have enough elements, skip
+
+        if self._is_valid_id(node.id):
+            selector += f"#{node.id}"
+        elif not validated_classes:
+            # selector += f":{self._make_node_id(node)}"
+            # leave just tag
+            pass
+        return selector     # "div.class1_example.class2_example#id_example"
+
+    def _make_node_id(self, node: LexborNode) -> str:
+        return "test_stub"
 
     def _is_valid_id(self, id: str) -> bool:
         # TODO:
@@ -82,9 +97,9 @@ class DOMSignatureExtractor:
 
     def _split_and_validate_classes(self, class_field: str | None) -> list[str]:
         if not class_field:
-            return [""]
+            return []
         # TODO:
-        return [class_field]
+        return [class_field]    # ["example1", "example2"] or []
 
     def _normalize_whitespaces(self, text: str) -> str:
         # TODO:
