@@ -1,0 +1,1216 @@
+
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Examples" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://selectolax.readthedocs.io/en/latest/examples.html" />
+<meta property="og:site_name" content="selectolax" />
+<meta property="og:description" content="This page contains simple examples of how to use Selectolax for HTML parsing and manipulation. Basic HTML Parsing: There are 3 ways to create or parse objects in Selectolax: Parse HTML as a full do..." />
+<meta name="description" content="This page contains simple examples of how to use Selectolax for HTML parsing and manipulation. Basic HTML Parsing: There are 3 ways to create or parse objects in Selectolax: Parse HTML as a full do..." />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="prev" title="selectolax.lexbor module" href="lexbor.html">
+        <link rel="prefetch" href="_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Examples - selectolax 0.4.13 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+
+
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+
+      }
+    }
+  }
+</style><script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="selectolax" /><meta name="readthedocs-version-slug" content="latest" /><meta name="readthedocs-resolver-filename" content="/examples.html" /><meta name="readthedocs-http-status" content="200" /></head>
+  <body>
+
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">selectolax 0.4.13 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
+  </div>
+
+  <span class="sidebar-brand-text">selectolax 0.4.13 documentation</span>
+
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="parser.html">selectolax.parser module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lexbor.html">selectolax.lexbor module</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Examples</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/rushter/selectolax/blob/master/docs/examples.rst?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/rushter/selectolax/edit/master/docs/examples.rst" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h1>
+<p>This page contains simple examples of how to use Selectolax for HTML parsing and manipulation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All examples use the Lexbor backend (<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">selectolax.lexbor</span> <span class="pre">import</span> <span class="pre">LexborHTMLParser</span></code>)
+which provides better performance and features compared to the older Modest backend.</p>
+</div>
+<section id="basic-html-parsing">
+<h2>Basic HTML Parsing<a class="headerlink" href="#basic-html-parsing" title="Link to this heading">¶</a></h2>
+<p>There are 3 ways to create or parse objects in Selectolax:</p>
+<ol class="arabic simple">
+<li><p>Parse HTML as a full document using <code class="docutils literal notranslate"><span class="pre">LexborHTMLParser()</span></code></p></li>
+<li><p>Parse HTML as a fragment using <code class="docutils literal notranslate"><span class="pre">LexborHTMLParser(...,</span> <span class="pre">is_fragment=True)</span></code></p></li>
+<li><p>Create single node using <code class="docutils literal notranslate"><span class="pre">LexborHTMLParser(...).create_node()</span></code></p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LexborHTMLParser()</span></code> - Returns the HTML tree as parsed by Lexbor, unmodified. The HTML is assumed to be a full document. <code class="docutils literal notranslate"><span class="pre">&lt;html&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code> tags are added if missing.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">LexborHTMLParser(...,</span> <span class="pre">is_fragment=True)</span></code> - Intended for HTML fragments/partials.</dt><dd><p>Behaves the same way as <cite>DocumentFragment</cite> in browsers.
+Drops <code class="docutils literal notranslate"><span class="pre">&lt;html&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code> tags if present in the input HTML.
+Use it to parse snippets of HTML that are not complete documents.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">selectolax.lexbor</span><span class="w"> </span><span class="kn">import</span> <span class="n">LexborHTMLParser</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;body&gt;</span>
+<span class="s2">    &lt;span id="vspan"&gt;&lt;/span&gt;</span>
+<span class="s2">    &lt;h1&gt;Welcome to selectolax tutorial&lt;/h1&gt;</span>
+<span class="s2">    &lt;div id="text"&gt;</span>
+<span class="s2">        &lt;p class='p3' style='display:none;'&gt;Excepteur &lt;i&gt;sint&lt;/i&gt; occaecat cupidatat non proident&lt;/p&gt;</span>
+<span class="s2">        &lt;p class='p3' vid&gt;Lorem ipsum&lt;/p&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">    &lt;div&gt;</span>
+<span class="s2">        &lt;p id='stext'&gt;Lorem ipsum dolor sit amet, ea quo modus meliore platonem.&lt;/p&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">&lt;/body&gt;</span>
+<span class="s2">"""</span>
+
+<span class="n">fragment</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;div&gt;</span>
+<span class="s2">    &lt;p class="p3"&gt;</span>
+<span class="s2">        Hello there!</span>
+<span class="s2">    &lt;/p&gt;</span>
+<span class="s2">&lt;/div&gt;</span>
+<span class="s2">&lt;script&gt;</span>
+<span class="s2">    document.querySelector(".p3").addEventListener("click", () =&gt; { ... });</span>
+<span class="s2">&lt;/script&gt;</span>
+<span class="s2">"""</span>
+
+<span class="c1"># Parse HTML as a full document</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Parse HTML as a fragment</span>
+<span class="n">frag_parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">is_fragment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Create a new node for  `parser`.</span>
+<span class="n">node</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="css-selectors">
+<h2>CSS Selectors<a class="headerlink" href="#css-selectors" title="Link to this heading">¶</a></h2>
+<section id="select-all-elements-with-css">
+<h3>Select All Elements with CSS<a class="headerlink" href="#select-all-elements-with-css" title="Link to this heading">¶</a></h3>
+<p>Find all paragraph elements with class ‘p3’ and examine their properties.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">selectolax.lexbor</span><span class="w"> </span><span class="kn">import</span> <span class="n">LexborHTMLParser</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;body&gt;</span>
+<span class="s2">    &lt;div id="text"&gt;</span>
+<span class="s2">        &lt;p class='p3' style='display:none;'&gt;Excepteur &lt;i&gt;sint&lt;/i&gt; occaecat cupidatat non proident&lt;/p&gt;</span>
+<span class="s2">        &lt;p class='p3' vid&gt;Lorem ipsum&lt;/p&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">    &lt;div&gt;</span>
+<span class="s2">        &lt;p id='stext'&gt;Lorem ipsum dolor sit amet, ea quo modus meliore platonem.&lt;/p&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">&lt;/body&gt;</span>
+<span class="s2">"""</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="n">selector</span> <span class="o">=</span> <span class="s2">"p.p3"</span>
+
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="n">selector</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'---------------------'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Node: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'attributes: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'node text: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'tag: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'parent tag: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">last_child</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'last child inside current node: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">last_child</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'---------------------</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>---------------------
+Node: &lt;p class='p3' style='display:none;'&gt;Excepteur &lt;i&gt;sint&lt;/i&gt; occaecat cupidatat non proident&lt;/p&gt;
+attributes: {'class': 'p3', 'style': 'display:none;'}
+node text: Excepteur sint occaecat cupidatat non proident
+tag: p
+parent tag: div
+last child inside current node: Excepteur &lt;i&gt;sint&lt;/i&gt; occaecat cupidatat non proident
+---------------------
+
+---------------------
+Node: &lt;p class='p3' vid&gt;Lorem ipsum&lt;/p&gt;
+attributes: {'class': 'p3', 'vid': ''}
+node text: Lorem ipsum
+tag: p
+parent tag: div
+last child inside current node: Lorem ipsum
+---------------------
+</pre></div>
+</div>
+</section>
+<section id="select-first-match">
+<h3>Select First Match<a class="headerlink" href="#select-first-match" title="Link to this heading">¶</a></h3>
+<p>Get the first matching element using CSS selectors.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Get first h1 element</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"H1: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>H1: Welcome to selectolax tutorial
+</pre></div>
+</div>
+</section>
+<section id="default-return-values">
+<h3>Default Return Values<a class="headerlink" href="#default-return-values" title="Link to this heading">¶</a></h3>
+<p>Handle cases where no elements match your selector by providing a default value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Return default value if no matches found</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Title: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">'not-found'</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Title: not-found
+</pre></div>
+</div>
+</section>
+<section id="strict-mode">
+<h3>Strict Mode<a class="headerlink" href="#strict-mode" title="Link to this heading">¶</a></h3>
+<p>Ensure exactly one match exists, otherwise raise an error.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This will raise an error if multiple matches are found</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s2">"p.p3"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">'not-found'</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ValueError: Expected 1 match, but found 2 matches
+</pre></div>
+</div>
+</section>
+<section id="css-chaining">
+<h3>CSS Chaining<a class="headerlink" href="#css-chaining" title="Link to this heading">¶</a></h3>
+<p>Chain multiple CSS selectors to progressively filter results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;div id="container"&gt;</span>
+<span class="s2">    &lt;span class="red"&gt;&lt;/span&gt;</span>
+<span class="s2">    &lt;span class="green"&gt;&lt;/span&gt;</span>
+<span class="s2">    &lt;span class="red"&gt;&lt;/span&gt;</span>
+<span class="s2">    &lt;span class="green"&gt;&lt;/span&gt;</span>
+<span class="s2">&lt;/div&gt;</span>
+<span class="s2">"""</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Chain selectors: start with div, then span, then .red</span>
+<span class="n">red_spans</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'div'</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"span"</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">".red"</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">html</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">red_spans</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['&lt;span class="red"&gt;&lt;/span&gt;', '&lt;span class="red"&gt;&lt;/span&gt;']
+</pre></div>
+</div>
+</section>
+</section>
+<section id="html-manipulation">
+<h2>HTML manipulation<a class="headerlink" href="#html-manipulation" title="Link to this heading">¶</a></h2>
+<section id="getting-html-data-back">
+<h3>Getting HTML data back<a class="headerlink" href="#getting-html-data-back" title="Link to this heading">¶</a></h3>
+<p>You can get HTML data back using <cite>.html</cite> or <cite>.inner_html</cite> properties.
+They can be called on any node.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">selectolax.lexbor</span><span class="w"> </span><span class="kn">import</span> <span class="n">LexborHTMLParser</span>
+<span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;div id="main"&gt;</span>
+<span class="s2">  &lt;div&gt;Hi there&lt;/div&gt;</span>
+<span class="s2">  &lt;div id="updated"&gt;2021-08-15&lt;/div&gt;</span>
+<span class="s2"> &lt;/div&gt;</span>
+<span class="s2">"""</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="n">node</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s2">"#main"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Inner html:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">inner_html</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Outer html:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Inner html:
+
+  &lt;div&gt;Hi there&lt;/div&gt;
+  &lt;div id="updated"&gt;2021-08-15&lt;/div&gt;
+
+Outer html:
+
+&lt;div id="main"&gt;
+  &lt;div&gt;Hi there&lt;/div&gt;
+  &lt;div id="updated"&gt;2021-08-15&lt;/div&gt;
+ &lt;/div&gt;
+</pre></div>
+</div>
+</section>
+<section id="changing-html">
+<h3>Changing HTML<a class="headerlink" href="#changing-html" title="Link to this heading">¶</a></h3>
+<p>You can also change HTML by setting the <cite>.inner_html</cite> property.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">selectolax.lexbor</span><span class="w"> </span><span class="kn">import</span> <span class="n">LexborHTMLParser</span>
+<span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;div id="main"&gt;</span>
+<span class="s2">  &lt;div&gt;Hi there&lt;/div&gt;</span>
+<span class="s2"> &lt;/div&gt;</span>
+<span class="s2">"""</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="n">node</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s2">"#main"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Old html:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+
+<span class="n">node</span><span class="o">.</span><span class="n">inner_html</span> <span class="o">=</span> <span class="s2">"&lt;span&gt;Test&lt;/span&gt;"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">New html:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">inner_html</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<blockquote>
+<div><p>Old html:</p>
+<dl>
+<dt>&lt;div id=”main”&gt;</dt><dd><blockquote>
+<div><p>&lt;div&gt;Hi there&lt;/div&gt;</p>
+</div></blockquote>
+<p>&lt;/div&gt;</p>
+</dd>
+</dl>
+<p>New html:</p>
+<p>&lt;div id=”main”&gt;&lt;span&gt;Test&lt;/span&gt;&lt;/div&gt;</p>
+</div></blockquote>
+</section>
+</section>
+<section id="dom-navigation">
+<h2>DOM Navigation<a class="headerlink" href="#dom-navigation" title="Link to this heading">¶</a></h2>
+<section id="parent-elements">
+<h3>Parent Elements<a class="headerlink" href="#parent-elements" title="Link to this heading">¶</a></h3>
+<p>Get parent element in the DOM tree.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print parent of p#stext</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'p#stext'</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;div&gt;
+        &lt;p id='stext'&gt;Lorem ipsum dolor sit amet, ea quo modus meliore platonem.&lt;/p&gt;
+    &lt;/div&gt;
+</pre></div>
+</div>
+</section>
+<section id="nested-selectors">
+<h3>Nested Selectors<a class="headerlink" href="#nested-selectors" title="Link to this heading">¶</a></h3>
+<p>Chain CSS selectors to find nested elements.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chain CSS selectors</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'div#text'</span><span class="p">)</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'p:nth-child(2)'</span><span class="p">)</span><span class="o">.</span><span class="n">html</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;p class='p3' vid&gt;Lorem ipsum&lt;/p&gt;
+</pre></div>
+</div>
+</section>
+<section id="iterating-over-child-nodes">
+<h3>Iterating Over Child Nodes<a class="headerlink" href="#iterating-over-child-nodes" title="Link to this heading">¶</a></h3>
+<p>Walk all child nodes of an element.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"div#text"</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">cnode</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">iter</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cnode</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">cnode</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p &lt;p class="p3" style="display:none;"&gt;Excepteur &lt;i&gt;sint&lt;/i&gt; occaecat cupidatat non proident&lt;/p&gt;
+p &lt;p class="p3" vid&gt;Lorem ipsum&lt;/p&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dom-modification">
+<h2>DOM Modification<a class="headerlink" href="#dom-modification" title="Link to this heading">¶</a></h2>
+<section id="tag-removal">
+<h3>Tag Removal<a class="headerlink" href="#tag-removal" title="Link to this heading">¶</a></h3>
+<p>Completely remove elements from the DOM tree.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Remove all p tags</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">tags</span><span class="p">(</span><span class="s1">'p'</span><span class="p">):</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;body&gt;
+    &lt;span id="vspan"&gt;&lt;/span&gt;
+    &lt;h1&gt;Welcome to selectolax tutorial&lt;/h1&gt;
+    &lt;div id="text"&gt;
+
+
+    &lt;/div&gt;
+    &lt;div&gt;
+
+    &lt;/div&gt;
+&lt;/body&gt;
+</pre></div>
+</div>
+</section>
+<section id="tag-unwrapping">
+<h3>Tag Unwrapping<a class="headerlink" href="#tag-unwrapping" title="Link to this heading">¶</a></h3>
+<p>Remove tags but preserve their content.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Remove p and i tags but keep their content</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">unwrap_tags</span><span class="p">([</span><span class="s1">'p'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;body&gt;
+    &lt;span id="vspan"&gt;&lt;/span&gt;
+    &lt;h1&gt;Welcome to selectolax tutorial&lt;/h1&gt;
+    &lt;div id="text"&gt;
+        Excepteur sint occaecat cupidatat non proident
+        Lorem ipsum
+    &lt;/div&gt;
+    &lt;div&gt;
+        Lorem ipsum dolor sit amet, ea quo modus meliore platonem.
+    &lt;/div&gt;
+&lt;/body&gt;
+</pre></div>
+</div>
+</section>
+<section id="attribute-manipulation">
+<h3>Attribute Manipulation<a class="headerlink" href="#attribute-manipulation" title="Link to this heading">¶</a></h3>
+<p>Add, modify, and remove element attributes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="n">node</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'div#text'</span><span class="p">)</span>
+
+<span class="c1"># Set attributes</span>
+<span class="n">node</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'secret data'</span>
+<span class="n">node</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'new_id'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span>
+
+<span class="c1"># Remove attributes</span>
+<span class="k">del</span> <span class="n">node</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'id': 'new_id', 'data': 'secret data'}
+{'data': 'secret data'}
+&lt;div data="secret data"&gt;
+        &lt;p class="p3" style="display:none;"&gt;Excepteur &lt;i&gt;sint&lt;/i&gt; occaecat cupidatat non proident&lt;/p&gt;
+        &lt;p class="p3" vid&gt;Lorem ipsum&lt;/p&gt;
+    &lt;/div&gt;
+</pre></div>
+</div>
+</section>
+<section id="inserting-nodes">
+<h3>Inserting Nodes<a class="headerlink" href="#inserting-nodes" title="Link to this heading">¶</a></h3>
+<p>Insert new content into the DOM at specific positions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;div id="container"&gt;</span>
+<span class="s2">    &lt;span class="red"&gt;&lt;/span&gt;</span>
+<span class="s2">    &lt;span class="green"&gt;&lt;/span&gt;</span>
+<span class="s2">    &lt;span class="red"&gt;&lt;/span&gt;</span>
+<span class="s2">    &lt;span class="green"&gt;&lt;/span&gt;</span>
+<span class="s2">&lt;/div&gt;</span>
+<span class="s2">"""</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Insert text before an element</span>
+<span class="n">red_node</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'.red'</span><span class="p">)</span>
+<span class="n">red_node</span><span class="o">.</span><span class="n">insert_before</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span>
+
+<span class="c1"># Insert HTML nodes</span>
+<span class="n">subtree</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="s2">"&lt;div&gt;Hi&lt;/div&gt;"</span><span class="p">)</span>
+<span class="n">green_node</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'.green'</span><span class="p">)</span>
+<span class="n">green_node</span><span class="o">.</span><span class="n">insert_before</span><span class="p">(</span><span class="n">subtree</span><span class="p">)</span>
+
+<span class="c1"># Insert before, after, or as child</span>
+<span class="n">car_div</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span>
+<span class="n">car_div</span><span class="o">.</span><span class="n">inner_html</span> <span class="o">=</span> <span class="s2">"Car"</span>
+<span class="n">green_node</span><span class="o">.</span><span class="n">insert_before</span><span class="p">(</span><span class="n">car_div</span><span class="p">)</span>
+<span class="n">green_node</span><span class="o">.</span><span class="n">insert_after</span><span class="p">(</span><span class="n">car_div</span><span class="p">)</span>
+<span class="n">green_node</span><span class="o">.</span><span class="n">insert_child</span><span class="p">(</span><span class="n">car_div</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tree-traversal">
+<h2>Tree Traversal<a class="headerlink" href="#tree-traversal" title="Link to this heading">¶</a></h2>
+<p>Walk  every node in the DOM tree and extract text content.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Traverse the entire tree</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">include_text</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">'-text'</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>html
+head
+body
+div
+p
+Excepteur
+i
+sint
+occaecat cupidatat non proident
+p
+Lorem ipsum
+div
+p
+Lorem ipsum dolor sit amet, ea quo modus meliore platonem.
+</pre></div>
+</div>
+</section>
+<section id="common-patterns">
+<h2>Common Patterns<a class="headerlink" href="#common-patterns" title="Link to this heading">¶</a></h2>
+<section id="extract-text-content">
+<h3>Extract Text Content<a class="headerlink" href="#extract-text-content" title="Link to this heading">¶</a></h3>
+<p>Extract text content from HTML elements with various formatting options.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="s1">'&lt;div&gt;&lt;p&gt;Hello &lt;b&gt;world&lt;/b&gt;!&lt;/p&gt;&lt;/div&gt;'</span><span class="p">)</span>
+
+<span class="c1"># Get text content with different options</span>
+<span class="n">node</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'p'</span><span class="p">)</span>
+
+<span class="c1"># Get all text content</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>  <span class="c1"># "Hello world!"</span>
+
+<span class="c1"># Get text with custom separator</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s1">' | '</span><span class="p">))</span>  <span class="c1"># "Hello | world | !"</span>
+
+<span class="c1"># Get text without stripping whitespace</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">strip</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hello world!
+Hello  | world | !
+Hello world!
+</pre></div>
+</div>
+</section>
+<section id="clean-html">
+<h3>Clean HTML<a class="headerlink" href="#clean-html" title="Link to this heading">¶</a></h3>
+<p>Remove potentially dangerous or unwanted HTML elements.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dirty_html</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">&lt;div&gt;</span>
+<span class="s1">    &lt;p&gt;Good content&lt;/p&gt;</span>
+<span class="s1">    &lt;script&gt;alert('xss')&lt;/script&gt;</span>
+<span class="s1">    &lt;style&gt;body { color: red; }&lt;/style&gt;</span>
+<span class="s1">    &lt;p&gt;More content&lt;/p&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+<span class="s1">'''</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">dirty_html</span><span class="p">)</span>
+
+<span class="c1"># Remove unwanted tags</span>
+<span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'script, style'</span><span class="p">):</span>
+    <span class="n">tag</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;body&gt;&lt;div&gt;
+    &lt;p&gt;Good content&lt;/p&gt;
+
+
+    &lt;p&gt;More content&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+</pre></div>
+</div>
+</section>
+<section id="extract-links-and-images">
+<h3>Extract Links and Images<a class="headerlink" href="#extract-links-and-images" title="Link to this heading">¶</a></h3>
+<p>Extract all links and images from HTML content.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">&lt;div&gt;</span>
+<span class="s1">    &lt;a href="https://example.com"&gt;Link 1&lt;/a&gt;</span>
+<span class="s1">    &lt;a href="/page2"&gt;Link 2&lt;/a&gt;</span>
+<span class="s1">    &lt;img src="image1.jpg" alt="Image 1"&gt;</span>
+<span class="s1">    &lt;img src="image2.png" alt="Image 2"&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+<span class="s1">'''</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Extract all links</span>
+<span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'a[href]'</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Link: </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'href'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Extract all images</span>
+<span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'img[src]'</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Image: </span><span class="si">{</span><span class="n">img</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'alt'</span><span class="p">,</span><span class="w"> </span><span class="s1">'No alt'</span><span class="p">)</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">img</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'src'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Link: Link 1 -&gt; https://example.com
+Link: Link 2 -&gt; /page2
+Image: Image 1 -&gt; image1.jpg
+Image: Image 2 -&gt; image2.png
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-selectors">
+<h2>Advanced selectors<a class="headerlink" href="#advanced-selectors" title="Link to this heading">¶</a></h2>
+<section id="text-content-filtering">
+<h3>Text Content Filtering<a class="headerlink" href="#text-content-filtering" title="Link to this heading">¶</a></h3>
+<p>Use advanced selectors to filter elements based on their text content.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;script&gt;</span>
+<span class="s2"> var super_variable = 100;</span>
+<span class="s2">&lt;/script&gt;</span>
+<span class="s2">&lt;script&gt;</span>
+<span class="s2"> console.log('debug');</span>
+<span class="s2">&lt;/script&gt;</span>
+<span class="s2">"""</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Filter script tags containing specific text</span>
+<span class="n">scripts_with_super</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'script'</span><span class="p">)</span><span class="o">.</span><span class="n">text_contains</span><span class="p">(</span><span class="s2">"super"</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">scripts_with_super</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['\n var super_variable = 100;\n']
+</pre></div>
+</div>
+</section>
+<section id="css-attribute-and-pseudo-class-selectors">
+<h3>CSS Attribute and Pseudo-class Selectors<a class="headerlink" href="#css-attribute-and-pseudo-class-selectors" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;div&gt;</span>
+<span class="s2">    &lt;article class="post published" data-id="1"&gt;</span>
+<span class="s2">        &lt;h2&gt;First Post&lt;/h2&gt;</span>
+<span class="s2">        &lt;p&gt;Content of first post&lt;/p&gt;</span>
+<span class="s2">        &lt;div class="meta"&gt;</span>
+<span class="s2">            &lt;span class="author"&gt;John&lt;/span&gt;</span>
+<span class="s2">            &lt;span class="date"&gt;2023-01-01&lt;/span&gt;</span>
+<span class="s2">        &lt;/div&gt;</span>
+<span class="s2">    &lt;/article&gt;</span>
+<span class="s2">    &lt;article class="post draft" data-id="2"&gt;</span>
+<span class="s2">        &lt;h2&gt;Second Post&lt;/h2&gt;</span>
+<span class="s2">        &lt;p&gt;Content of second post&lt;/p&gt;</span>
+<span class="s2">        &lt;div class="meta"&gt;</span>
+<span class="s2">            &lt;span class="author"&gt;Jane&lt;/span&gt;</span>
+<span class="s2">            &lt;span class="date"&gt;2023-01-02&lt;/span&gt;</span>
+<span class="s2">        &lt;/div&gt;</span>
+<span class="s2">    &lt;/article&gt;</span>
+<span class="s2">    &lt;aside class="sidebar"&gt;</span>
+<span class="s2">        &lt;div class="widget"&gt;</span>
+<span class="s2">            &lt;h3&gt;Popular Posts&lt;/h3&gt;</span>
+<span class="s2">            &lt;ul&gt;</span>
+<span class="s2">                &lt;li&gt;&lt;a href="#1"&gt;First Post&lt;/a&gt;&lt;/li&gt;</span>
+<span class="s2">                &lt;li&gt;&lt;a href="#2"&gt;Second Post&lt;/a&gt;&lt;/li&gt;</span>
+<span class="s2">            &lt;/ul&gt;</span>
+<span class="s2">        &lt;/div&gt;</span>
+<span class="s2">    &lt;/aside&gt;</span>
+<span class="s2">&lt;/div&gt;</span>
+<span class="s2">"""</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Attribute selectors</span>
+<span class="n">published_posts</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'article.post.published'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Published posts: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">published_posts</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Descendant selectors</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'article .meta .author'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">author</span> <span class="ow">in</span> <span class="n">authors</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Author: </span><span class="si">{</span><span class="n">author</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Pseudo-class selectors</span>
+<span class="n">first_article</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'article:first-child'</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">first_article</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"First article title: </span><span class="si">{</span><span class="n">first_article</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'h2'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Attribute value selectors</span>
+<span class="n">specific_post</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'article[data-id="1"]'</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">specific_post</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Post ID 1 title: </span><span class="si">{</span><span class="n">specific_post</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'h2'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Published posts: 1
+Author: John
+Author: Jane
+First article title: First Post
+Post ID 1 title: First Post
+</pre></div>
+</div>
+</section>
+<section id="text-content-pseudo-class-selectors">
+<h3>Text Content Pseudo-class Selectors<a class="headerlink" href="#text-content-pseudo-class-selectors" title="Link to this heading">¶</a></h3>
+<p>Use lexbor-specific pseudo-classes for case-sensitive and case-insensitive text matching.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html</span> <span class="o">=</span> <span class="s1">'&lt;div&gt;&lt;p&gt;hello &lt;/p&gt;&lt;p id="main"&gt;lexbor is AwesOme&lt;/p&gt;&lt;/div&gt;'</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="c1"># Case-insensitive search</span>
+<span class="n">results_ci</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'p:lexbor-contains("awesome" i)'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Case-insensitive results: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results_ci</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Case-sensitive search</span>
+<span class="n">results_cs</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'p:lexbor-contains("AwesOme")'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Case-sensitive results: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results_cs</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Matching text: </span><span class="si">{</span><span class="n">results_cs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Case-insensitive results: 1
+Case-sensitive results: 1
+Matching text: lexbor is AwesOme
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sibling-navigation">
+<h2>Sibling Navigation<a class="headerlink" href="#sibling-navigation" title="Link to this heading">¶</a></h2>
+<p>Navigate between sibling elements in the DOM.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;nav&gt;</span>
+<span class="s2">    &lt;a href="/"&gt;Home&lt;/a&gt;</span>
+<span class="s2">    &lt;a href="/about"&gt;About&lt;/a&gt;</span>
+<span class="s2">    &lt;a href="/contact" class="active"&gt;Contact&lt;/a&gt;</span>
+<span class="s2">    &lt;a href="/blog"&gt;Blog&lt;/a&gt;</span>
+<span class="s2">&lt;/nav&gt;</span>
+<span class="s2">"""</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="n">active_link</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s2">"a.active"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">active_link</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Active link: </span><span class="si">{</span><span class="n">active_link</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="c1"># We need to call it twice, because there are text nodes (spaces and new lines) between &lt;a&gt; elements</span>
+    <span class="k">if</span> <span class="n">active_link</span><span class="o">.</span><span class="n">prev</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Previous link: </span><span class="si">{</span><span class="n">active_link</span><span class="o">.</span><span class="n">prev</span><span class="o">.</span><span class="n">prev</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">active_link</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Next link: </span><span class="si">{</span><span class="n">active_link</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Active link: Contact
+Previous link: About
+Next link: Blog
+</pre></div>
+</div>
+</section>
+<section id="table-parsing">
+<h2>Table Parsing<a class="headerlink" href="#table-parsing" title="Link to this heading">¶</a></h2>
+<p>Parse HTML tables and extract structured data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">table_html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;table class="data-table"&gt;</span>
+<span class="s2">    &lt;thead&gt;</span>
+<span class="s2">        &lt;tr&gt;</span>
+<span class="s2">            &lt;th&gt;Name&lt;/th&gt;</span>
+<span class="s2">            &lt;th&gt;Age&lt;/th&gt;</span>
+<span class="s2">            &lt;th&gt;City&lt;/th&gt;</span>
+<span class="s2">            &lt;th&gt;Occupation&lt;/th&gt;</span>
+<span class="s2">        &lt;/tr&gt;</span>
+<span class="s2">    &lt;/thead&gt;</span>
+<span class="s2">    &lt;tbody&gt;</span>
+<span class="s2">        &lt;tr&gt;</span>
+<span class="s2">            &lt;td&gt;Alice Johnson&lt;/td&gt;</span>
+<span class="s2">            &lt;td&gt;28&lt;/td&gt;</span>
+<span class="s2">            &lt;td&gt;New York&lt;/td&gt;</span>
+<span class="s2">            &lt;td&gt;Software Engineer&lt;/td&gt;</span>
+<span class="s2">        &lt;/tr&gt;</span>
+<span class="s2">        &lt;tr&gt;</span>
+<span class="s2">            &lt;td&gt;Bob Smith&lt;/td&gt;</span>
+<span class="s2">            &lt;td&gt;35&lt;/td&gt;</span>
+<span class="s2">            &lt;td&gt;Los Angeles&lt;/td&gt;</span>
+<span class="s2">            &lt;td&gt;Designer&lt;/td&gt;</span>
+<span class="s2">        &lt;/tr&gt;</span>
+<span class="s2">        &lt;tr&gt;</span>
+<span class="s2">            &lt;td&gt;Carol Brown&lt;/td&gt;</span>
+<span class="s2">            &lt;td&gt;42&lt;/td&gt;</span>
+<span class="s2">            &lt;td&gt;Chicago&lt;/td&gt;</span>
+<span class="s2">            &lt;td&gt;Manager&lt;/td&gt;</span>
+<span class="s2">        &lt;/tr&gt;</span>
+<span class="s2">    &lt;/tbody&gt;</span>
+<span class="s2">&lt;/table&gt;</span>
+<span class="s2">"""</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">table_html</span><span class="p">)</span>
+
+<span class="c1"># Extract headers</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="n">th</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'thead th'</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Headers:"</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="c1"># Extract data rows</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'tbody tr'</span><span class="p">):</span>
+    <span class="n">row_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">td</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">td</span> <span class="ow">in</span> <span class="n">tr</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'td'</span><span class="p">)]</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_data</span><span class="p">)</span>
+
+<span class="c1"># Display as structured data</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Row </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">header</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">header</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Headers: ['Name', 'Age', 'City', 'Occupation']
+
+Row 1:
+  Name: Alice Johnson
+  Age: 28
+  City: New York
+  Occupation: Software Engineer
+
+Row 2:
+  Name: Bob Smith
+  Age: 35
+  City: Los Angeles
+  Occupation: Designer
+
+Row 3:
+  Name: Carol Brown
+  Age: 42
+  City: Chicago
+  Occupation: Manager
+</pre></div>
+</div>
+</section>
+<section id="form-data-extraction">
+<h2>Form Data Extraction<a class="headerlink" href="#form-data-extraction" title="Link to this heading">¶</a></h2>
+<p>Parse HTML forms and extract input data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">form_html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;form id="contact-form" method="post" action="/submit"&gt;</span>
+<span class="s2">    &lt;div class="form-group"&gt;</span>
+<span class="s2">        &lt;label for="name"&gt;Name:&lt;/label&gt;</span>
+<span class="s2">        &lt;input type="text" id="name" name="name" value="John Doe" required&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">    &lt;div class="form-group"&gt;</span>
+<span class="s2">        &lt;label for="email"&gt;Email:&lt;/label&gt;</span>
+<span class="s2">        &lt;input type="email" id="email" name="email" placeholder="john@example.com"&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">    &lt;div class="form-group"&gt;</span>
+<span class="s2">        &lt;label for="country"&gt;Country:&lt;/label&gt;</span>
+<span class="s2">        &lt;select id="country" name="country"&gt;</span>
+<span class="s2">            &lt;option value="us"&gt;United States&lt;/option&gt;</span>
+<span class="s2">            &lt;option value="ca" selected&gt;Canada&lt;/option&gt;</span>
+<span class="s2">            &lt;option value="uk"&gt;United Kingdom&lt;/option&gt;</span>
+<span class="s2">        &lt;/select&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">    &lt;div class="form-group"&gt;</span>
+<span class="s2">        &lt;label&gt;</span>
+<span class="s2">            &lt;input type="checkbox" name="newsletter" checked&gt; Subscribe to newsletter</span>
+<span class="s2">        &lt;/label&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">    &lt;div class="form-group"&gt;</span>
+<span class="s2">        &lt;label for="message"&gt;Message:&lt;/label&gt;</span>
+<span class="s2">        &lt;textarea id="message" name="message" rows="4"&gt;Hello there!&lt;/textarea&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">    &lt;button type="submit"&gt;Submit&lt;/button&gt;</span>
+<span class="s2">&lt;/form&gt;</span>
+<span class="s2">"""</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">LexborHTMLParser</span><span class="p">(</span><span class="n">form_html</span><span class="p">)</span>
+
+<span class="c1"># Extract form metadata</span>
+<span class="n">form</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s1">'form'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Form ID: </span><span class="si">{</span><span class="n">form</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Form method: </span><span class="si">{</span><span class="n">form</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'method'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Form action: </span><span class="si">{</span><span class="n">form</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'action'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Extract input fields</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Input fields:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">input_field</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'input'</span><span class="p">):</span>
+    <span class="n">field_type</span> <span class="o">=</span> <span class="n">input_field</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="s1">'text'</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">input_field</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">input_field</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+    <span class="n">checked</span> <span class="o">=</span> <span class="s1">'checked'</span> <span class="ow">in</span> <span class="n">input_field</span><span class="o">.</span><span class="n">attrs</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">field_type</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'[checked]'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">checked</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Extract select options</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Select fields:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">select</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'select'</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">select</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'option'</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'value'</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+        <span class="n">selected</span> <span class="o">=</span> <span class="s1">'selected'</span> <span class="ow">in</span> <span class="n">option</span><span class="o">.</span><span class="n">attrs</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"    </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'[selected]'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">selected</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Extract textarea</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Textarea fields:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">textarea</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'textarea'</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">textarea</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">textarea</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Form ID: contact-form
+Form method: post
+Form action: /submit
+
+Input fields:
+  name (text): John Doe
+  email (email):
+  newsletter (checkbox):  [checked]
+
+Select fields:
+  country:
+    us: United States
+    ca: Canada [selected]
+    uk: United Kingdom
+
+Textarea fields:
+  message: Hello there!
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+
+        <div class="related-pages">
+
+          <a class="prev-page" href="lexbor.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+
+                <div class="title">selectolax.lexbor module</div>
+
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2018-2026, Artem Golubin
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+
+          </div>
+          <div class="right-details">
+
+          </div>
+        </div>
+
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+
+
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Examples</a><ul>
+<li><a class="reference internal" href="#basic-html-parsing">Basic HTML Parsing</a></li>
+<li><a class="reference internal" href="#css-selectors">CSS Selectors</a><ul>
+<li><a class="reference internal" href="#select-all-elements-with-css">Select All Elements with CSS</a></li>
+<li><a class="reference internal" href="#select-first-match">Select First Match</a></li>
+<li><a class="reference internal" href="#default-return-values">Default Return Values</a></li>
+<li><a class="reference internal" href="#strict-mode">Strict Mode</a></li>
+<li><a class="reference internal" href="#css-chaining">CSS Chaining</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#html-manipulation">HTML manipulation</a><ul>
+<li><a class="reference internal" href="#getting-html-data-back">Getting HTML data back</a></li>
+<li><a class="reference internal" href="#changing-html">Changing HTML</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dom-navigation">DOM Navigation</a><ul>
+<li><a class="reference internal" href="#parent-elements">Parent Elements</a></li>
+<li><a class="reference internal" href="#nested-selectors">Nested Selectors</a></li>
+<li><a class="reference internal" href="#iterating-over-child-nodes">Iterating Over Child Nodes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dom-modification">DOM Modification</a><ul>
+<li><a class="reference internal" href="#tag-removal">Tag Removal</a></li>
+<li><a class="reference internal" href="#tag-unwrapping">Tag Unwrapping</a></li>
+<li><a class="reference internal" href="#attribute-manipulation">Attribute Manipulation</a></li>
+<li><a class="reference internal" href="#inserting-nodes">Inserting Nodes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tree-traversal">Tree Traversal</a></li>
+<li><a class="reference internal" href="#common-patterns">Common Patterns</a><ul>
+<li><a class="reference internal" href="#extract-text-content">Extract Text Content</a></li>
+<li><a class="reference internal" href="#clean-html">Clean HTML</a></li>
+<li><a class="reference internal" href="#extract-links-and-images">Extract Links and Images</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-selectors">Advanced selectors</a><ul>
+<li><a class="reference internal" href="#text-content-filtering">Text Content Filtering</a></li>
+<li><a class="reference internal" href="#css-attribute-and-pseudo-class-selectors">CSS Attribute and Pseudo-class Selectors</a></li>
+<li><a class="reference internal" href="#text-content-pseudo-class-selectors">Text Content Pseudo-class Selectors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sibling-navigation">Sibling Navigation</a></li>
+<li><a class="reference internal" href="#table-parsing">Table Parsing</a></li>
+<li><a class="reference internal" href="#form-data-extraction">Form Data Extraction</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+
+
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=d4dc9828"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
