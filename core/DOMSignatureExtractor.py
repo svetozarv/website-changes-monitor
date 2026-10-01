@@ -1,58 +1,91 @@
-from selectolax.lexbor import LexborHTMLParser
-# div.card > button.btn-buy > span (tag.class)
-
-TERMINAL_BLOCKS = [
-    "p",
-    "h1",
-    "h2",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "li",
-    "tr",
-    "td",
-    "article",
-    "section",
-    "div",
-    "blockquote",
-    "header",
-    "footer",
-    "nav"
-]
-
-# Tags that are essentially part of the text
-INLINE_TAGS = [
-    "span",
-    "strong",
-    "b",
-    "em",
-    "i",
-    "small",
-    "del",
-    "ins",
-    "mark",
-    "sub",
-    "sup",
-    "label"
-]
+from selectolax.lexbor import LexborHTMLParser, LexborNode
+from core.parameters import CONTAINER_TAGS, TERMINAL_BLOCKS, INLINE_TAGS, INTERACTIVE_TAGS
 
 
 class DOMSignatureExtractor:
-    def __init__(self):
+    def __init__(
+            self,
+            container_tags: set[str]    = CONTAINER_TAGS,
+            terminal_blocks: set[str]   = TERMINAL_BLOCKS,
+            inline_tags: set[str]       = INLINE_TAGS,
+            interactive_tags: set[str]  = INTERACTIVE_TAGS,
+            max_depth: int              = 9
+        ) -> None:
+        self.container_tags = container_tags
+        self.terminal_blocks = terminal_blocks
+        self.inline_tags = inline_tags
+        self.interactive_tags = interactive_tags
+        self.max_depth = max_depth
+
+    def extract_signatures(self, body_node: LexborNode) -> list[str]:
+        if not body_node:
+            return []
+        signatures: list[str]    = []
+        current_path: list[str]  = []
+        self._traverse(body_node, current_path, signatures)
+        return signatures
+
+    def _traverse(self, node: LexborNode, current_path: list[str], signatures: list[str]) -> None:
+        if not node or node.tag == "-comment": return
+        if node.tag in INTERACTIVE_TAGS:
+            text = node.text(deep=True, separator=" ", strip=True, skip_empty=True)
+            attrs_str = "["
+            for attr, value in node.attributes.items():
+                attrs_str += f"{attr}={value}, "
+            attrs_str = attrs_str[:-2] + "]"
+
+        if node.tag in TERMINAL_BLOCKS or self._is_leaf_block(node):
+            text = node.text(deep=True, separator=" ", strip=True, skip_empty=True)
+            text = self._normalize_whitespaces(text)
+
+
+        node_child = node.first_child
+        while node_child is not None:
+            self._traverse(node_child, current_path, signatures)
+            node_child = node_child.next
+
+    def _process_block(self, node: LexborNode):
         pass
 
-    def extract_signatures(self):
-        pass
+    def _is_leaf_block(self, node: LexborNode):
+        """
+        Returns True if this node is a terminal node (in other words, is not a container)
+        Needed for <div> <section> etc, because they can contain text (in which we are interested in) or contain other elements (which are not relevant)
 
-    def _traverse(self):
-        pass
+        Answers the question: does this block divide the page further or it already contains content
+        """
+        if not node:
+            raise ValueError("Node cannot be `None`.")
+        if isinstance(node, str):
+            raise ValueError("Node must be LexborNode, not string")
 
-    def _process_block(self):
-        pass
+        node_child = node.first_child
+        while node_child is not None:
+            if node_child.tag in CONTAINER_TAGS or node_child.tag in TERMINAL_BLOCKS:
+                return False
+            node_child = node_child.next
+        return True
 
-    def _is_content_leaf(self, node):
-        return "stab"
+    def _form_node_selector(self, node: LexborNode) -> str:
+        if not node or node.tag == "-text" or node.tag == "-document" or node.tag == "-comment":
+            raise ValueError(f"Cannot form selector for: `{node.tag}`")
+        selector = f"{node.tag}"
+        validated_classes = self._split_and_validate_classes(node.attributes['class'])
+        if validated_classes:
+            selector += f".{validated_classes[0]}"
+            
+        return "div.class1_example.class2_example#id_example"
 
-    def _build_breadcrumb(self):
-        pass
+    def _is_valid_id(self, id: str) -> bool:
+        # TODO:
+        return False
+
+    def _split_and_validate_classes(self, class_field: str | None) -> list[str]:
+        if not class_field:
+            return [""]
+        # TODO:
+        return [class_field]
+
+    def _normalize_whitespaces(self, text: str) -> str:
+        # TODO:
+        return text
