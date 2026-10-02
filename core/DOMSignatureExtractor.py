@@ -29,11 +29,20 @@ class DOMSignatureExtractor:
         if not node or node.tag == "-comment": return
         if node.tag in INTERACTIVE_TAGS:
             text = node.text(deep=True, separator=" ", strip=True, skip_empty=True)
+
+            # form node signature: collect tracked attributes
+            # ex. `a[href=example.com]``
             attrs_str = "["
             for attr, value in node.attributes.items():
                 if attr not in TRACKED_ATTRIBUTES: continue
                 attrs_str += f"{attr}={value}, "
             attrs_str = attrs_str[:-2] + "]"
+            node_selector = f"{node.tag}{attrs_str}"
+            current_path.append(node_selector)
+
+            signatures.append(self._form_signature(current_path))
+
+            current_path.pop()
             self._traverse(node.next, current_path, signatures)  # stop  kids traversal go to neighbour
             return
 
@@ -43,19 +52,26 @@ class DOMSignatureExtractor:
             if not text: return
             node_selector = self._form_node_selector(node)
             current_path.append(node_selector)
-
-            # TODO: form signature
-            signature = ""
-            signatures.append(signature)
+            signatures.append(self._form_signature(current_path))
+            current_path.pop()
             self._traverse(node.next, current_path, signatures)  # stop  kids traversal go to neighbour
             return
 
         if node.tag in CONTAINER_TAGS:
+            added_selector = False
+
             node_selector = self._form_node_selector(node)
             if node_selector != node.tag:
                 current_path.append(node_selector)
+                added_selector = True
             self._traverse_node_children(node, current_path, signatures)
 
+            if added_selector:
+                current_path.pop()
+            signatures.append(self._form_signature(current_path))
+
+    def _form_signature(self, current_path: list[str]) -> str:
+        return " > ".join(current_path)
 
     def _traverse_node_children(self, node: LexborNode, current_path: list[str], signatures: list[str]) -> None:
         node_child = node.first_child
@@ -90,11 +106,19 @@ class DOMSignatureExtractor:
     def _form_node_selector(self, node: LexborNode) -> str:
         """
         Forms node selector.
+
         Examples:
-            - `div.class1_example.class2_example#id_example` - if 2 or more classes are valid.
-            - `div.class_example#id_example` - if only one class is valid.
-            - `div#id_example` - if no valid classes.
-            - `div` - if neither classes nor id are valid.
+            - `div.class1_example.class2_example#id_example`
+                - if 2 or more classes are valid.
+            ---
+            - `div.class_example#id_example`
+                - if only one class is valid.
+            ---
+            - `div#id_example`
+                - if no valid classes.
+            ---
+            - `div`
+                - if neither classes nor id are valid.
         """
         if not node or node.tag == "-text" or node.tag == "-document" or node.tag == "-comment":
             raise ValueError(f"Cannot form selector for: `{node.tag}`")
