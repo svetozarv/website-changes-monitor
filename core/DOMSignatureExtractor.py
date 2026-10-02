@@ -1,5 +1,5 @@
 from selectolax.lexbor import LexborHTMLParser, LexborNode
-from core.parameters import CONTAINER_TAGS, TERMINAL_BLOCKS, INLINE_TAGS, INTERACTIVE_TAGS
+from core.parameters import CONTAINER_TAGS, TERMINAL_BLOCKS, INLINE_TAGS, INTERACTIVE_TAGS, TRACKED_ATTRIBUTES
 import re
 
 class DOMSignatureExtractor:
@@ -22,7 +22,7 @@ class DOMSignatureExtractor:
             return []
         signatures: list[str]    = []
         current_path: list[str]  = []
-        self._traverse(body_node, current_path, signatures)
+        self._traverse(body_node, current_path, signatures)     # the current_path and signatures are modified in-place though the entire call stack
         return signatures
 
     def _traverse(self, node: LexborNode, current_path: list[str], signatures: list[str]) -> None:
@@ -31,24 +31,43 @@ class DOMSignatureExtractor:
             text = node.text(deep=True, separator=" ", strip=True, skip_empty=True)
             attrs_str = "["
             for attr, value in node.attributes.items():
+                if attr not in TRACKED_ATTRIBUTES: continue
                 attrs_str += f"{attr}={value}, "
             attrs_str = attrs_str[:-2] + "]"
+            self._traverse(node.next, current_path, signatures)  # stop  kids traversal go to neighbour
+            return
 
         if node.tag in TERMINAL_BLOCKS or self._is_leaf_block(node):
             text = node.text(deep=True, separator=" ", strip=True, skip_empty=True)
             text = self._normalize_whitespaces(text)
+            if not text: return
+            node_selector = self._form_node_selector(node)
+            current_path.append(node_selector)
 
-        # TODO:
+            # TODO: form signature
+            signature = ""
+            signatures.append(signature)
+            self._traverse(node.next, current_path, signatures)  # stop  kids traversal go to neighbour
+            return
+
+        if node.tag in CONTAINER_TAGS:
+            node_selector = self._form_node_selector(node)
+            if node_selector != node.tag:
+                current_path.append(node_selector)
+            self._traverse_node_children(node, current_path, signatures)
+
+
+    def _traverse_node_children(self, node: LexborNode, current_path: list[str], signatures: list[str]) -> None:
         node_child = node.first_child
         while node_child is not None:
             self._traverse(node_child, current_path, signatures)
             node_child = node_child.next
 
+    # TODO: implement
     def _process_block(self, node: LexborNode):
-        # TODO:
         pass
 
-    def _is_leaf_block(self, node: LexborNode):
+    def _is_leaf_block(self, node: LexborNode) -> bool:
         """
         Returns True if this node is a terminal node (in other words, is not a container)
         Needed for <div> <section> etc, because they can contain text (in which we are interested in) or contain other elements (which are not relevant)
@@ -59,7 +78,7 @@ class DOMSignatureExtractor:
             raise ValueError("Node cannot be `None`.")
         if isinstance(node, str):
             raise ValueError("Node must be LexborNode, not string")
-        # TODO:
+
         node_child = node.first_child
         while node_child is not None:
             if node_child.tag in CONTAINER_TAGS or node_child.tag in TERMINAL_BLOCKS:
@@ -67,8 +86,16 @@ class DOMSignatureExtractor:
             node_child = node_child.next
         return True
 
+    # TODO: test
     def _form_node_selector(self, node: LexborNode) -> str:
-        # TODO:
+        """
+        Forms node selector.
+        Examples:
+            - `div.class1_example.class2_example#id_example` - if 2 or more classes are valid.
+            - `div.class_example#id_example` - if only one class is valid.
+            - `div#id_example` - if no valid classes.
+            - `div` - if neither classes nor id are valid.
+        """
         if not node or node.tag == "-text" or node.tag == "-document" or node.tag == "-comment":
             raise ValueError(f"Cannot form selector for: `{node.tag}`")
 
@@ -84,14 +111,23 @@ class DOMSignatureExtractor:
             selector += f"#{node.id}"
         elif not validated_classes:
             # selector += f":{self._make_node_id(node)}"
-            # leave just tag
+            # leave just tag for now
             pass
-        return selector     # "div.class1_example.class2_example#id_example"
+        return selector
 
     def _make_node_id(self, node: LexborNode) -> str:
+        """
+        Make a unique node selector identifier, so the element in a breadcrump
+        can be recognized as separate or related text in comparison to other breadcrumbs.
+
+        Example:
+        `div > element#(first_element) > Relevant information`
+        `div > element#(second_element) > Unavailable`
+        """
         return "test_stub"
 
-    def _is_valid_id(self, id: str) -> bool:
+    # TODO: test
+    def _is_valid_id(self, id: str | None) -> bool:
         """
         Checks if id was autogenerated and looks like timestap, hash, UUID etc.
         """
@@ -114,6 +150,7 @@ class DOMSignatureExtractor:
 
         return True
 
+    # TODO: test
     def _split_and_validate_classes(self, class_fields: str | None) -> list[str]:
         if not class_fields:
             return []
@@ -127,6 +164,7 @@ class DOMSignatureExtractor:
 
         return valid_classes    # ["example1", "example2"] or []
 
+    # TODO: test
     def _is_valid_class(self, class_field: str) -> bool:
         """
         Checks if class was autogenerated by Tailwind or Bootstrap or it looks like hash.
@@ -145,6 +183,7 @@ class DOMSignatureExtractor:
 
         return True
 
+    # TODO: test
     def _normalize_whitespaces(self, text: str) -> str:
         """
         Replaces multiple spaces, newlines and no-break space with a single space.
