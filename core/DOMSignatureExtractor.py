@@ -239,11 +239,12 @@ class DOMSignatureExtractor:
 
 
 if __name__ == "__main__":
-    with open("/home/svietozar/desktop/website-changes-monitor/selectolax-docs.html", "r") as file:
+    filepath = "/home/svietozar/desktop/website-changes-monitor/selectolax-docs.html"
+    with open(filepath, "r") as file:
         html = sanitize_html(file.read())
 
     domex = DOMSignatureExtractor()
     signatures = domex.extract_signatures(html.body)
-    with open("output.txt", "w") as file:
+    with open(f"{filepath.split('/')[-1].split('.')[0]}-breadcrumbs.html", "w") as file:
         file.write("\n".join(signatures))
     print("Done.")
