@@ -1,3 +1,5 @@
+# TODO: add ability to modify this during runtime
+# TODO: make it customizable for each webpage
 
 CONTAINER_TAGS = {
     "div",
@@ -94,3 +96,33 @@ INLINE_TAGS = {
     "br",
     "wbr",
 }
+
+
+# Exact matches for standalone layout utility CSS keywords
+UTILITY_EXACT_MATCHES: set[str] = {
+    "flex",
+    "inline-flex",
+    "grid",
+    "hidden",
+    "block",
+    "inline-block",
+    "relative",
+    "absolute",
+    "fixed",
+    "sticky",
+    "container",
+    "truncate",
+}
+
+
+UTILITY_PREFIXES: tuple[str, ...] = (
+    "p-", "px-", "py-", "pt-", "pb-", "pl-", "pr-",
+    "m-", "mx-", "my-", "mt-", "mb-", "ml-", "mr-",
+    "w-", "h-", "min-w-", "max-w-", "min-h-", "max-h-",
+    "gap-", "space-", "col-", "row-",
+    "items-", "justify-", "content-", "self-", "place-",        # Flexbox and  Grid alignment
+    "text-", "font-", "leading-", "tracking-", "bg-", "border-", "rounded-",
+    "transition-", "duration-", "shadow-", "opacity-", "z-",
+)
+
+BUNDLER_PREFIXES: tuple[str, ...] = ("sc-", "css-")

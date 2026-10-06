@@ -17,7 +17,7 @@ def test_is_leaf_block_with_custom_tags():
 
 def test_form_signature():
     exctractor = DOMSignatureExtractor()
-    assert exctractor._form_signature(["div.button", "div.text", "a"]) == "div.button > div.text > a\n"
+    assert exctractor._form_signature(["div.button", "div.text", "a"], "heloo") == "div.button > div.text > a: heloo"
 
 
 @pytest.mark.parametrize("block, expected", [
@@ -139,6 +139,9 @@ def test_split_and_validate_classes(string, expected):
     ("price", True),
     ("btn-primary", True),
     ("active", True),
+    ("navigation-wrapper", True),
+    ("notification-badge", True),
+
 ])
 def test_is_valid_class(string, expected):
     exctractor = DOMSignatureExtractor()
