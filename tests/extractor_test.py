@@ -2,6 +2,7 @@ import pytest
 from selectolax.lexbor import LexborHTMLParser
 from core.DOMSignatureExtractor import DOMSignatureExtractor
 
+
 def test_is_leaf_block_with_custom_tags():
     html = """
         <div class="price-row">
@@ -15,10 +16,41 @@ def test_is_leaf_block_with_custom_tags():
 
 
 def test_form_signature():
-    pass
+    exctractor = DOMSignatureExtractor()
+    assert exctractor._form_signature(["div.button", "div.text", "a"]) == "div.button > div.text > a\n"
 
-def test_is_leaf_block():
-    pass
+
+@pytest.mark.parametrize("block, expected", [
+    ("<div id=\"target\">Just plain text</div>", True),
+    ("<div id=\"target\">Price: <span>100 zł</span> <b>netto</b></div>", True),   # All children are inline modifiers
+    ("<div id=\"target\">Terms: <a href=\"/rules\">Read more</a></div>", True),
+    ("<div id=\"target\">Line 1<br>Line 2<wbr>Line 3</div>", True),
+    ("<div id=\"target\"><app-icon></app-icon> Status</div>", True),      # Unknown tag is not block tag
+    ("<div id=\"target\"><p>Paragraph inside</p></div>", False),
+    ("<div id=\"target\"><h1>Title</h1></div>", False),
+    ("<div id=\"target\"><div id=\"inner\">Text</div></div>", False),
+    ("<div id=\"target\"><ul><li>Item 1</li></ul></div>", False),
+    ("<div id=\"target\"><!-- comment -->Visible text</div>", True),
+])
+def test_is_leaf_block_detection(block, expected):
+    exctractor = DOMSignatureExtractor()
+    parser = LexborHTMLParser(block)
+    target_node = parser.css_first("#target")
+    assert target_node is not None
+    assert exctractor._is_leaf_block(target_node) == expected
+
+
+def test_is_leaf_block_hierarchical_nesting():
+    exctractor = DOMSignatureExtractor()
+    html = """
+    <div id="outer">
+        <div id="middle">
+            <div id="inner">
+                <span>Final content</span>
+            </div>
+        </div>
+    </div>
+    """
 
 
 def test_form_node_selector():
@@ -55,6 +87,7 @@ def test_is_valid_id(string, expected):
     exctractor = DOMSignatureExtractor()
     assert exctractor._is_valid_id(string) == expected
 
+
 @pytest.mark.parametrize("string, expected", [
     (None, []),
     ("", []),
@@ -69,6 +102,7 @@ def test_is_valid_id(string, expected):
 def test_split_and_validate_classes(string, expected):
     exctractor = DOMSignatureExtractor()
     assert exctractor._split_and_validate_classes(string) == expected
+
 
 @pytest.mark.parametrize("string, expected", [
     ("", False),
