@@ -1,6 +1,7 @@
 from selectolax.lexbor import LexborHTMLParser, LexborNode
 from core.parameters import CONTAINER_TAGS, TERMINAL_BLOCKS, INLINE_TAGS, INTERACTIVE_TAGS, TRACKED_ATTRIBUTES
 import re
+from core.utils import sanitize_html
 
 class DOMSignatureExtractor:
     def __init__(
@@ -22,11 +23,16 @@ class DOMSignatureExtractor:
             return []
         signatures: list[str]    = []
         current_path: list[str]  = []
-        self._traverse(body_node, current_path, signatures)     # the current_path and signatures are modified in-place though the entire call stack
+        self._traverse(body_node.first_child, current_path, signatures)     # the current_path and signatures are modified in-place though the entire call stack
         return signatures
 
     def _traverse(self, node: LexborNode, current_path: list[str], signatures: list[str]) -> None:
-        if not node or node.tag == "-comment": return
+        if not node or node.tag == "-comment":
+            return
+
+        if node.is_empty_text_node:
+            self._traverse(node.next, current_path, signatures)
+
         if node.tag in INTERACTIVE_TAGS:
             text = node.text(deep=True, separator=" ", strip=True, skip_empty=True)
 
@@ -69,6 +75,7 @@ class DOMSignatureExtractor:
             if added_selector:
                 current_path.pop()
             signatures.append(self._form_signature(current_path))
+            return
 
     def _form_signature(self, current_path: list[str]) -> str:
         return " > ".join(current_path)
@@ -213,3 +220,12 @@ class DOMSignatureExtractor:
         Replaces multiple spaces, newlines and no-break space with a single space.
         """
         return re.sub(r"(\s+|&nbsp;|\\xa0)", " ", text.strip())
+
+
+if __name__ == "__main__":
+    with open("/home/svietozar/desktop/website-changes-monitor/selectolax-docs.html", "r") as file:
+        html = sanitize_html(file.read())
+
+    domex = DOMSignatureExtractor()
+    signatures = domex.extract_signatures(html.body)
+    print(signatures)
